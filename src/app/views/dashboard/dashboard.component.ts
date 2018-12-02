@@ -275,9 +275,9 @@ export class DashboardComponent implements OnInit {
         borderWidth: 2
       },
       point: {
-        radius: 0,
+        radius: 4,
         hitRadius: 10,
-        hoverRadius: 4,
+        hoverRadius: 10,
         hoverBorderWidth: 3,
       }
     },
@@ -384,7 +384,7 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i <= this.mainChartElements; i++) {
       this.mainChartData1.push(this.random(50, 200));
       this.mainChartData2.push(this.random(80, 100));
-      this.mainChartData3.push(65);
+      this.mainChartData3.push(this.random(20, 240));
     }
   }
 }
