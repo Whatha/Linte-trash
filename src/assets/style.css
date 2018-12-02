@@ -1,0 +1,38 @@
+.app{
+
+}
+
+.app-header{
+	background-color: #000017;
+	border-bottom: 0;
+}
+
+.sidebar .nav{
+		background-color: #000017;
+
+}
+
+a{
+	color: white;
+}
+
+.breadcrumb {
+	padding: 5px;
+	padding-left: 30px;
+	background: #2F88BB;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: #ffffff;
+    content: "/";
+}
+
+.breadcrumb-item.active {
+    color: #ffffff;
+}
+
+.bg-primary {
+    background-color: #000017 !important;
+}
