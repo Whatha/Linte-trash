@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class DashboardComponent implements OnInit {
 
 
-  basuras: Observable < any[] > ;
+  temp: Observable < any[] > ;
   distancias: Observable < any[] > ;
   public valores = Array < number > ();
   public lineChart1Data: Array < any > = [{
@@ -19,16 +19,29 @@ export class DashboardComponent implements OnInit {
     label: 'valores'
   }];
   public lineChart1Labels: Array < any > = [];
+
+  public lineChart3Data: Array < any > = [{
+    data: [78, 81, 80, 45, 34, 12, 40],
+    label: 'Humedad'
+  }];
+  public lineChart3Labels: Array < any > = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   itemsRef;
+  humedRef;
   distancia;
   peso;
   temperatura;
+  humedades;
+  humedad;
   constructor(public db: AngularFireDatabase) {
-    this.basuras = db.list('Basura papel').valueChanges();
-    this.itemsRef = db.list('Basura papel');
+    this.temp = db.list('Temperatura').valueChanges();
+    this.humedades = db.list('Humedad').valueChanges();
+
+    this.itemsRef = db.list('Temperatura');
+        this.humedRef = db.list('Humedad');
+
     this.distancias = db.list('Basuras/distancia').valueChanges();
 
-    this.basuras.subscribe(res => {
+    this.temp.subscribe(res => {
       this.valores = [];
       res.forEach(valor => {
         this.valores.push(valor);
@@ -37,8 +50,19 @@ export class DashboardComponent implements OnInit {
         data: res,
         label: 'test'
       }];
- console.log("tamaño "+res.length);
-      this.temperatura= res[res.length-1];
+      this.temperatura = res[res.length - 1];
+    });
+
+    this.humedades.subscribe(res => {
+      this.valores = [];
+      res.forEach(valor => {
+        this.valores.push(valor);
+      });
+      this.lineChart3Data = [{
+        data: res,
+        label: 'humedad'
+      }];
+      this.humedad = res[res.length - 1];
     });
 
     this.distancias.subscribe(res => {
@@ -47,7 +71,7 @@ export class DashboardComponent implements OnInit {
         parseInt(valor);
         console.log(valor.distancia);
       });
-     
+
     });
 
     db.object('/Basuras/distancia')
@@ -58,14 +82,32 @@ export class DashboardComponent implements OnInit {
       });
 
 
-      db.object('/Basuras/peso')
+    db.object('/Basuras/peso')
       .valueChanges()
       .subscribe(res => {
         console.log(res) //should give you the array of percentage. 
         this.peso = res;
       });
 
-    this.itemsRef.snapshotChanges(['child_added'])
+    this.humedRef.snapshotChanges(['child_added'])
+      .subscribe(actions => {
+        this.lineChart3Labels = [];
+        actions.forEach(action => {
+          this.lineChart3Labels.push(action.key);
+        });
+      });
+
+    this.humedRef.snapshotChanges(['child_removed'])
+      .subscribe(actions => {
+        this.lineChart3Labels = [];
+        actions.forEach(action => {
+          this.lineChart3Labels.push(action.key);
+
+
+        });
+      });
+
+      this.itemsRef.snapshotChanges(['child_added'])
       .subscribe(actions => {
         this.lineChart1Labels = [];
         actions.forEach(action => {
@@ -78,6 +120,8 @@ export class DashboardComponent implements OnInit {
         this.lineChart1Labels = [];
         actions.forEach(action => {
           this.lineChart1Labels.push(action.key);
+
+
         });
       });
   }
@@ -216,11 +260,7 @@ export class DashboardComponent implements OnInit {
 
 
   // lineChart3
-  public lineChart3Data: Array < any > = [{
-    data: [78, 81, 80, 45, 34, 12, 40],
-    label: 'Humedad'
-  }];
-  public lineChart3Labels: Array < any > = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
   public lineChart3Options: any = {
     tooltips: {
       enabled: false,
