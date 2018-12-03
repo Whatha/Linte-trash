@@ -1,14 +1,19 @@
 export const navItems = [
   {
+    title: true,
+    name: 'Dashboard'
+  },
+  {
+    name: 'Ciclo',
+    url: '/ciclo',
+    icon: 'fa fa-trash-o'
+  },
+  {
     name: 'Linte',
     url: '/linte',
     icon: 'fa fa-lightbulb-o'
   },
-   {
-    name: 'Basuras',
-    url: '/dashboard',
-    icon: 'fa fa-trash-o'
-  },
+   
   {
     title: true,
     name: 'Theme'
@@ -215,18 +220,5 @@ export const navItems = [
         icon: 'icon-star'
       }
     ]
-  },
-  {
-    name: 'Download CoreUI',
-    url: 'http://coreui.io/angular/',
-    icon: 'icon-cloud-download',
-    class: 'mt-auto',
-    variant: 'success'
-  },
-  {
-    name: 'Try CoreUI PRO',
-    url: 'http://coreui.io/pro/angular/',
-    icon: 'icon-layers',
-    variant: 'danger'
   }
 ];

@@ -16,6 +16,10 @@ a{
 	color: white;
 }
 
+.nav a{
+	color:#000017;
+}
+
 .breadcrumb {
 	padding: 5px;
 	padding-left: 30px;
@@ -35,4 +39,47 @@ a{
 
 .bg-primary {
     background-color: #000017 !important;
+}
+
+.card-sm {
+    margin-bottom: 1.5rem;
+    height: 180px;
+    -webkit-transition: all 0.3s ease; /* Safari */
+    transition: all 0.3s ease;
+}
+
+.mb-4, .my-4 {
+     margin-bottom: 0 !important; 
+}
+
+.card-sm .mb-0 {
+    margin-bottom: 0!important;
+    font-size: 3em;
+}
+
+.icon_size{
+	font-size: 3em;
+}
+
+.peso .pt-3, .py-3 {
+    padding-top: 1rem!important;
+    text-align: right;
+    margin-right: 30px;
+    font-size: 4em;
+    color: #20c997!important;
+}
+
+.peso .text-muted{
+	text-align: right;
+    margin-right: 30px;
+}
+
+.peso .font-2xl {
+    font-size: 4.5rem!important;
+    background-color: #20c997!important;
+}
+
+
+.switch{
+	margin: 20px;
 }

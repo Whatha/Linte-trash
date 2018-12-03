@@ -12,12 +12,12 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
-  title = 'guav';
-  description = 'Angular5-Firebase Demo';
+  title;
+  description;
  
   itemValue = '';
   items: Observable<any[]>;
-  labels='';
+  labels;
 
    constructor(public db: AngularFireDatabase) {
 
